@@ -31,97 +31,76 @@ Publish the website in the given URL.
 # PROGRAM :
 ```
 math.html
-
 <html>
 <head>
-<h1 align=	"center"> S DHANUS KARTHI (24005701)</h1>
-<title>Area of Rectangle</title>
-<style>
-    body {
-        background-color: red;
-    }
-    .edge {
-        width: 1240px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 200px;
-        padding-left: 200px;
-    }
-    .box { 
-        display: block;
-        width: 500px;
-        min-height: 30px;
-        font-size: 20px;
-        background-color: yellow;
-        color: black;
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-    .formelt {
-        margin-top: 7px;
-        margin-bottom: 6px;
-    }
+    <title> mathapp </title>      
+    <style>
+body{
+    background-color:blue;
+}
+h1{
+    background-color:yellow;
+}
+form{
+    background-color:orange;
+}
 </style>
-</head>
+</head >
 <body>
-<div class="edge">
-    <div class="box">
-        <h1>Area of a Rectangle</h1>
-            <div>
-                Length: <input type="text" name="length" value="1"> (in m)<br/>
-            </div>
-            <div>
-                Breadth: <input type="text" name="breadth" value="1"> (in m)<br/>
-            </div>
-            <div class="formlet">
-                <input type="submit" value="Calculate"><br/>
-            </div>
-            <div class="formelt">
-               
-            </div>
-    </div>
-</div>
-</body>
+    <h1 align="center"> POWER OF BULB </h1>
+    <form align="center" method="POST">
+        {% csrf_token %}
+        Intensity <input name="I" value="{{i}}">
+        <br>
+        <br>
+        Resistance <input name="R" value="{{r}}">
+        <br>
+        <br>
+        <input type="submit" value="calculate">
+        <br>
+        <br>
+        Power <input name="power"value={{power}}>
+    </form>
+    </body> 
 </html>
 
 views.py
-
-from django.shortcuts import render
-def powerlamp(request): 
-context={} 
-context['power']="0" 
-context['i']="0" 
-context['r']="0" 
-if request.method=='POST': 
-    print("POST method is used")
-    i=request.POST.get('intensity','0')
-    r=request.POST.get('resistance','0')
-    print('request=',request) 
-    print('intensity=',i) 
-    print('resistance=',r) 
-    power=(int(i) ** 2 ) * int(r) 
-    context['power']=power
-    context['i']=i
-    context['r']=r 
-    print('Power=',power) 
-     return render(request,'myapp/math.html',context)
+from django.shortcuts import render 
+def powerofbulb(request): 
+    context={} 
+    context['power'] = "0" 
+    context['i'] = "0" 
+    context['r'] = "0" 
+    if request.method == 'POST': 
+        print("POST method is used")
+        i = request.POST.get('I','0')
+        r = request.POST.get('R','0')
+        print('request=',request) 
+        print('Intensity=',i) 
+        print('Resistance=',r) 
+        power = (int(i) ** 2)*int(r) 
+        context['power'] = power 
+        context['i'] = i
+        context['r'] = r
+        print('power=',power) 
+    return render(request,'mathapp/math.html',context)
 
 urls.py
 
 from django.contrib import admin 
 from django.urls import path 
-from myapp import views 
+from mathapp import views 
 urlpatterns = [ 
-path('admin/', admin.site.urls), 
-path('powerlamp/',views.powerlamp,name="powerlamp"),
-path('',views.powerlamp,name="powerlamproot")
+    path('admin/', admin.site.urls), 
+    path('powerofbulb/',views.powerofbulb,name="powerofbulb"),
+    path('',views.powerofbulb,name="powerofbulbroot")
 ]
+
 ```
-# SERVER SIDE PROCESSING:![Screenshot 2024-12-02 193137](https://github.com/user-attachments/assets/878cf5b0-d52e-417f-9056-6d2857c0121f)
+# SERVER SIDE PROCESSING:![Screenshot 2024-12-06 200721](https://github.com/user-attachments/assets/00f89407-4d3a-418d-94b1-3cf232cfb3ad)
 
 
-# HOMEPAGE:![Screenshot 2024-12-02 193234](https://github.com/user-attachments/assets/fdfa287f-d28e-4c1e-8207-7d8fa75da9d0)
+# HOMEPAGE:![Screenshot 2024-12-06 200736](https://github.com/user-attachments/assets/9db785ea-a2ed-47ea-ad17-e9ccbe58dda3)
 
 
 # RESULT:
